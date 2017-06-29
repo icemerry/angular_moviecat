@@ -1,0 +1,30 @@
+<h2 class='page-header'>{{title}}</h2>
+<span class='recordCount' ng-if='isloaded'>总共{{totalCount}}条记录</span>
+<div class="list-group">
+  <a ng-repeat="item in subjects" href="#" class="list-group-item">
+    <span class="badge" ng-bind='item.rating.average'></span>
+    <div class="media">
+      <div class="media-left">
+        <img class="media-object" ng-src="{{item.images.small}}" alt="{{item.title}}">
+      </div>
+      <div class="media-body">
+        <h3 class="media-heading">{{item.title}}</h3>
+        <p>导演：<span ng-repeat='d in item.directors'>{{d.name+($last?'':'、')}}</span>&nbsp;&nbsp;&nbsp;&nbsp; 演员：<span ng-repeat='c in item.casts'>{{c.name+($last?'':'、')}}</span></p>
+        <p>类型：<span>{{item.genres.join('、')}}</span>&nbsp;&nbsp;&nbsp;&nbsp; 上映年份：<span>{{item.year}}年</span></p>
+      </div>
+    </div>
+  </a>
+</div>
+<span class='recordPage' ng-if='isloaded'>第{{currentPage}} / {{pageCount}}页</span>
+<ul class="pager" ng-if='isloaded'>
+  <li ng-class='{disabled:currentPage<=1}'><a ng-click="goto(currentPage-1)">上一页</a></li>
+  <!--<li ng-repeat='page in pages'><a ng-click="goto(page)">{{page}}</a></li>-->
+  <li ng-class='{disabled:currentPage>=pageCount}'><a ng-click="goto(currentPage+1)">下一页</a></li>
+</ul>
+<div class="loading" ng-if='!isloaded'>
+  <span></span>
+  <span></span>
+  <span></span>
+  <span></span>
+  <span></span>
+</div>
